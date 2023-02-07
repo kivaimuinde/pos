@@ -16,8 +16,7 @@ if (empty(isset($_SESSION["login"]))) {
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css"
-    rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.3/font/bootstrap-icons.min.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -30,9 +29,8 @@ if (empty(isset($_SESSION["login"]))) {
 -->
 
   <script>
-
     function AddNewUser() {
-      $("form").submit(function (event) {
+      $("form").submit(function(event) {
 
         $(".form-group").removeClass("has-error");
         $(".help-block").remove();
@@ -48,7 +46,7 @@ if (empty(isset($_SESSION["login"]))) {
           data: formData,
           dataType: "json",
           encode: true,
-        }).done(function (data) {
+        }).done(function(data) {
           console.log(data);
           if (!data.success) {
             if (data.errors.username) {
@@ -66,7 +64,7 @@ if (empty(isset($_SESSION["login"]))) {
             if (data.errors.confirm_password) {
               $("#confirm-password-group").addClass("has-error");
               $("#confirm-password-group").append(
-                '<div class="help-block text text-danger">' + data.errors.confirm _password + "</div>"
+                '<div class="help-block text text-danger">' + data.errors.confirm_password + "</div>"
               );
             }
             if (data.errors.match_password) {
@@ -80,7 +78,6 @@ if (empty(isset($_SESSION["login"]))) {
               );
             }
           } else {
-            //$("#msg").html('<p class="alert alert-success">' + data.message + "</p>");
             location.reload();
           }
           event.preventDefault();
@@ -99,7 +96,7 @@ if (empty(isset($_SESSION["login"]))) {
     if (!isset($_SESSION["category"]) == "admin") {
       echo '<div class="alert alert-warning"> You are not allowed to visit this page. Please contact the system admin for assistabce</div>';
     } else {
-      ?>
+    ?>
       <div class="row flex-nowrap">
         <?php
         include("sidebar.php");
@@ -143,8 +140,7 @@ if (empty(isset($_SESSION["login"]))) {
                     </div>
                     <div id="confirm-password-group" class="form-group">
                       <label for="confirm-password">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirm_password" name="confirm_password"
-                        placeholder="********" />
+                      <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="********" />
                     </div>
 
                   </div>
@@ -158,14 +154,14 @@ if (empty(isset($_SESSION["login"]))) {
 
         </div>
       </div>
-      <?php
+    <?php
     }
     ?>
 </body>
 <script>
   function LoadUserData() {
     var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
+    xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
         document.getElementById("users-data").innerHTML =
           this.responseText;
@@ -174,7 +170,7 @@ if (empty(isset($_SESSION["login"]))) {
     xhttp.open("GET", "backend/users/all-users.php", true);
     xhttp.send();
   }
-  setInterval(function () {
+  setInterval(function() {
     LoadUserData();
   }, 1000);
 
