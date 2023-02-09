@@ -28,7 +28,9 @@ if (empty(isset($_SESSION["login"]))) {
   <!-- 
     <script src="include/js/bootstrap.bundle.min.js"></script>
 -->
+  <script>
 
+  </script>
 </head>
 
 <body>
@@ -90,7 +92,10 @@ if (empty(isset($_SESSION["login"]))) {
                   <td><?php echo $status; ?></td>
                   <td><?php echo $category; ?></td>
                   <td>
-
+                    <form id="suspend-user-form" method="POST" action="../../backend/users/suspend-user.php">
+                      <input type="hidden" name="id" id="id" value="<?php echo $id; ?>" />
+                      <input type="submit" id="submit" name="suspend" value="Suspend" class="btn btn-danger" />
+                    </form>
 
                   </td>
                 </tr>
