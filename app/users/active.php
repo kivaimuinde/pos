@@ -34,7 +34,9 @@ if(empty(isset($_SESSION["login"]))){
 
 <?php
 if(!isset($_SESSION["category"])=="admin"){
-    echo '<div class="alert alert-warning"> You are not allowed to visit this page. Please contact the system admin for assistabce</div>';
+    echo '<div class="alert alert-warning">'
+    .'You are not allowed to visit this page.'
+    .' Please contact the system admin for assistabce</div>';
 } else {
     ?>
     <div class="row flex-nowrap">
@@ -42,14 +44,17 @@ if(!isset($_SESSION["category"])=="admin"){
             include("../pos-sidebar.php");
         ?>
         <div class="col py-3">
-            <div class="row">
-                <div class="col-9">
-                    <h5 class="text text-center">POS Active System Users</h3>
-                </div>
-                <div class="col-3">
-                    <button class="btn-primary"><i class="fas fa-plus"></i> Add User</p>
-                </div>
+        <div class="row">
+            <div class="col-9">
+              <h5 class="text text-center">POS System: All Users</h3>
             </div>
+            <div class="col-3">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-primary">
+                <a href="../users/suspend.php" class="text text-white"> Suspend Users</a>
+              </button>
+            </div>
+          </div>
             <div id="active-users-data"></div>
     
         </div>

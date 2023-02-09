@@ -63,13 +63,13 @@
                                 <a href="../../users.php" class="nav-link px-0"> <span class="d-none d-sm-inline">All</span> Users</a>
                             </li>
                             <li>
-                                <a href="../../pos/users/active.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Active</span></a>
+                                <a href="../../app/users/active.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Active</span></a>
                             </li>
                             <li>
-                                <a href="../../pos/users/inactive.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Inactive</span></a>
+                                <a href="../../app/users/inactive.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Inactive</span></a>
                             </li>
                             <li>
-                                <a href="../../pos/users/suspended.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Suspended</span></a>
+                                <a href="../../app/users/suspended.php" class="nav-link px-0"> <span class="d-none d-sm-inline">Suspended</span></a>
                             </li>
                         </ul>
                     </li>

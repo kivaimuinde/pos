@@ -28,64 +28,6 @@ if (empty(isset($_SESSION["login"]))) {
 <script src="include/js/bootstrap.bundle.min.js"></script>
 -->
 
-  <script>
-    function AddNewUser() {
-      $("form").submit(function(event) {
-
-        $(".form-group").removeClass("has-error");
-        $(".help-block").remove();
-        $("#msg").html("");
-        var formData = {
-          username: $("#username").val(),
-          password: $("#password").val(),
-          confirm_password: $("#confirm_password").val(),
-        };
-        $.ajax({
-          type: "POST",
-          url: "backend/account/add-user.php",
-          data: formData,
-          dataType: "json",
-          encode: true,
-        }).done(function(data) {
-          console.log(data);
-          if (!data.success) {
-            if (data.errors.username) {
-              $("#username-group").addClass("has-error");
-              $("#username-group").append(
-                '<div class="help-block text text-danger">' + data.errors.username + "</div>"
-              );
-            }
-            if (data.errors.password) {
-              $("#password-group").addClass("has-error");
-              $("#password-group").append(
-                '<div class="help-block text text-danger">' + data.errors.password + "</div>"
-              );
-            }
-            if (data.errors.confirm_password) {
-              $("#confirm-password-group").addClass("has-error");
-              $("#confirm-password-group").append(
-                '<div class="help-block text text-danger">' + data.errors.confirm_password + "</div>"
-              );
-            }
-            if (data.errors.match_password) {
-              $("#password-group").addClass("has-error");
-              $("#password-group").append(
-                '<div class="help-block text text-danger">' + data.errors.match_password + "</div>"
-              );
-              $("#confirm-password-group").addClass("has-error");
-              $("#confirm-password-group").append(
-                '<div class="help-block text text-danger">' + data.errors.match_password + "</div>"
-              );
-            }
-          } else {
-            location.reload();
-          }
-          event.preventDefault();
-        });
-      });
-    }
-  </script>
-
 </head>
 
 <body>
@@ -114,45 +56,7 @@ if (empty(isset($_SESSION["login"]))) {
             </div>
           </div>
           <div id="users-data"></div>
-
-
-
-
-          <!-- Add user Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="addUserModal" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <form id="add-user-form" action="backend/account/add-user.php" method="POST" onsubmit="return AddNewUser();">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5 text text-center"><a href="pos/users/add-user.php">Add New User</a></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                  </div>
-                  <div class="modal-body">
-                    <div id="msg"></div>
-                    <div id="username-group" class="form-group">
-                      <label for="username">Name</label>
-                      <input type="text" class="form-control" id="username" name="username" placeholder="Username" />
-                    </div>
-
-                    <div id="password-group" class="form-group">
-                      <label for="password">Password</label>
-                      <input type="password" class="form-control" id="password" name="password" placeholder="********" />
-                    </div>
-                    <div id="confirm-password-group" class="form-group">
-                      <label for="confirm-password">Confirm Password</label>
-                      <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="********" />
-                    </div>
-
-                  </div>
-                  <div class="modal-footer">
-                    <input type="submit" class="btn btn-primary" value="Add User" />
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-
-        </div>
+ </div>
       </div>
     <?php
     }
@@ -172,9 +76,10 @@ if (empty(isset($_SESSION["login"]))) {
   }
   setInterval(function() {
     LoadUserData();
-  }, 1000);
+  }, 100);
 
   window.onload = LoadUserData;
+
 </script>
 
 </html>
