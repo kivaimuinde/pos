@@ -3,6 +3,7 @@ session_start();
 if (empty(isset($_SESSION["login"]))) {
   header("Location:login.php");
 }
+include("backend/config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,42 +45,61 @@ if (empty(isset($_SESSION["login"]))) {
         include("sidebar.php");
         ?>
         <div class="col py-3">
-          <div class="row">
+          <div class="row fixed-top bg-dark">
             <div class="col-9">
-              <h5 class="text text-center">POS System: All Users</h3>
+              <h3 class="text text-center text-white">POS System: All Users</h3>
+              <br>
             </div>
             <div class="col-3">
               <!-- Button trigger modal -->
               <button type="button" class="btn btn-primary">
-                <a href="pos/users/add-user.php" class="text text-white"> Add User</a>
+                <a href="app/users/add-user.php" class="text text-white"> Add User</a>
               </button>
             </div>
           </div>
-          <div id="users-data"></div>
- </div>
-      </div>
-    <?php
+          <div id="users-data" style="padding-top: 1cm">
+           
+            <table class="table table-responsive table-striped table-light">
+              <thead>
+                <th>#</th>
+                <th>Username</th>
+                <th>Category</th>
+                <th>Status</th>
+              </thead>
+              <tr>
+                <td colspan="5">
+                  <div id="msg"></div>
+                </td>
+              </tr>
+
+              <?php
+              $me = $_SESSION["id"];
+              $query = "SELECT * from USERS  where id!='$me' order by username";
+              $res = mysqli_query($conn, $query);
+              $count = 0;
+              while ($row = mysqli_fetch_array($res)) {
+                $count = $count + 1;
+                $id = $row["id"];
+                $username = $row["username"];
+                $category = $row["category"];
+                $status = $row["status"];
+              ?>
+                <tr>
+                  <td><?php echo $count; ?></td>
+                  <td><a href="../../../../pos/app/users/user-details.php?user=<?php echo $id; ?>" class="text text-capitalize text-default"><?php echo $username; ?></a></td>
+                  <td><?php echo $status; ?></td>
+                  <td><?php echo $category; ?></td>
+                </tr>
+
+              <?php
+              }
+              ?>
+            </table>
+
+          </div>
+        </div>
+      <?php
     }
-    ?>
+      ?>
 </body>
-<script>
-  function LoadUserData() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("users-data").innerHTML =
-          this.responseText;
-      }
-    };
-    xhttp.open("GET", "backend/users/all-users.php", true);
-    xhttp.send();
-  }
-  setInterval(function() {
-    LoadUserData();
-  }, 100);
-
-  window.onload = LoadUserData;
-
-</script>
-
 </html>

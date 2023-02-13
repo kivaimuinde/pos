@@ -39,28 +39,3 @@ include("../config.php");
   }
   ?>
 </table>
-
-<script>
-  $(document).ready(function() {
-    $("activate_form").click(function(e) {
-      e.preventDefault();
-      $.ajax({
-        type: "POST",
-        url: "backend/users/activate-user.php",
-        data: {
-          id: $(this).$("#id").val(),
-        }.done(function(result) {
-          console.log(data);
-          if (!data.success) {
-            if (data.errors.delete) {
-              $("#msg").html('<p class="alert alert-danger">' + data.errors.delete + "</p>");
-            }
-          } else {
-            $("#msg").html('<p class="alert alert-danger">' + data.message + "</p>");
-          }
-        }),
-      });
-    });
-
-  });
-</script>
